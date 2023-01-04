@@ -270,7 +270,7 @@ const WebcamImg = () => {
         <div className="container-downloading">
           <h1>Downloading...</h1>
           <img
-            src="/images/imvi-logo.png"
+            src={process.env.PUBLIC_URL + "/images/imvi-logo.png"}
             id="imvi-logo"
             alt="imvi labs logo"
           ></img>
