@@ -1,0 +1,53 @@
+.container-app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  gap: 1rem;
+}
+
+.result {
+  border-radius: 1rem;
+}
+
+.container-img,
+.container-video,
+.container-downloading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 1rem;
+  gap: 1rem;
+}
+
+.container-downloading {
+  color: #fff;
+}
+
+.container-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+#photo {
+  width: 640px;
+  height: 360px;
+  object-fit: cover;
+}
+
+#imvi-logo {
+  width: inherit;
+  height: inherit;
+}
+
+/* @media only screen and (max-width: 670px) {
+  img {
+    width: 320px;
+    height: 180px;
+  }
+} */
