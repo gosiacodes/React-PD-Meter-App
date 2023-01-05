@@ -340,26 +340,29 @@ const WebcamImg = () => {
             Best result can be achieved, when the face is about 40 cm from the
             camera.
           </p>
-          <p>Sit very still and don't move your head, then take a picture.</p>
+          <p>
+            Make sure that there is a good lighting and the camera is clean.
+          </p>
+          <p>
+            Sit very still and don't move your head, look at the camera or above
+            and then take a picture.
+          </p>
           <p>
             The result number on snapshot is your approximate distance between
             the pupils.
           </p>
-          <p>
-            You can retake the picture as many times as you want.
-          </p>
+          <p>You can retake the picture as many times as you want (wait until video loads again).</p>
           <p>
             It is good to take the picture a few times and calculate the
-            average.
+            average
           </p>
           <p>
-            (Add all numbers and then divide sum by the count of those numbers.)
+            (add all numbers and then divide sum by the count of those numbers).
           </p>
+          <p>You can save pictures locally on your computer if you want</p>
           <p>
-            You can save pictures locally on your computer if you want.
-          </p>   
-          <p>
-            (Right-click on the picture and choose "Save image as..." from menu.)
+            (right-click on the picture and choose "Save image as..." from
+            menu).
           </p>
         </div>
       </div>

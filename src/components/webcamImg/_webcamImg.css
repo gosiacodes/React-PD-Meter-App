@@ -41,12 +41,18 @@
 }
 
 #imvi-logo {
-  width: inherit;
-  height: inherit;
+  width: 15rem;
+  height: 15rem;
+  margin-top: 1rem;
+  animation: rotation 5s infinite;
+}
+
+@keyframes rotation {
+  50% {transform: rotate(360deg)};
 }
 
 /* @media only screen and (max-width: 670px) {
-  img {
+  #photo {
     width: 320px;
     height: 180px;
   }
