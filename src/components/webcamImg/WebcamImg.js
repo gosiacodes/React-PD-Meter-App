@@ -6,7 +6,7 @@ import {
   // FACEMESH_TESSELATION,
   FACEMESH_RIGHT_IRIS,
   FACEMESH_LEFT_IRIS,
-  FACEMESH_FACE_OVAL,
+  // FACEMESH_FACE_OVAL,
 } from "@mediapipe/face_mesh";
 import { Camera } from "@mediapipe/camera_utils";
 import { drawConnectors } from "@mediapipe/drawing_utils";
@@ -16,8 +16,30 @@ const WebcamImg = () => {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const [imgSrc, setImgSrc] = useState(null);
-  const width = 640.0;
-  const height = 360.0;
+  const [PDValue, setPDValue] = useState("");
+  const [PDResult, setPDResult] = useState("");
+  const [lastPDResult, setLastPDResult] = useState(0);
+  const deviceWidth =
+    window.innerWidth ||
+    document.documentElement.clientWidth ||
+    document.body.clientWidth;
+
+  let width = 640.0;
+  let height = 480.0;
+
+  if (deviceWidth < 670 && deviceWidth >= 510) {
+    width = 480.0;
+    height = 360.0;
+  }
+  if (deviceWidth < 510 && deviceWidth >= 390) {
+    width = 360.0;
+    height = 360.0;
+  }
+  if (deviceWidth < 390) {
+    width = 240.0;
+    height = 240.0;
+  }
+
   const videoConstraints = {
     width: width,
     height: height,
@@ -104,16 +126,8 @@ const WebcamImg = () => {
         let pupilWidth = Math.min(pupils.left.width, pupils.right.width);
         let pd = (irisWidthInMM / pupilWidth) * distance;
 
-        // Drawing result of pupils distance on canvas
-        canvasCtx.font = "20px Arial";
-        canvasCtx.fillStyle = "#4379b8";
-        canvasCtx.fillRect(canvasElement.width / 2 - 300, 20, 100, 50);
-        canvasCtx.fillStyle = "#fff";
-        canvasCtx.fillText(
-          "PD: " + pd.toFixed(0),
-          canvasElement.width / 2 - 280,
-          50
-        );
+        // Setting real-time pupillary distance
+        setPDValue(pd.toFixed(0));
 
         // Drawing Face Mesh results of pupils on canvas
         canvasCtx.fillStyle = "#4379b8";
@@ -192,7 +206,7 @@ const WebcamImg = () => {
           4
         );
 
-        // Drawing Face Mesh landmarks of iris and face oval on canvas (and tessellation if you want)
+        // Drawing Face Mesh landmarks of iris on canvas (and face oval and tessellation if you want)
         for (const landmarks of results.multiFaceLandmarks) {
           // drawConnectors(canvasCtx, landmarks, FACEMESH_TESSELATION, {
           //   color: "#C0C0C070",
@@ -206,9 +220,9 @@ const WebcamImg = () => {
             color: "#FF3030",
             lineWidth: 1,
           });
-          drawConnectors(canvasCtx, landmarks, FACEMESH_FACE_OVAL, {
-            color: "#E0E0E0",
-          });
+          // drawConnectors(canvasCtx, landmarks, FACEMESH_FACE_OVAL, {
+          //   color: "#E0E0E0",
+          // });
         }
       }
       canvasCtx.restore();
@@ -246,7 +260,7 @@ const WebcamImg = () => {
       document.querySelector(".container-img").style.display = "none";
     }
     return () => {};
-  }, [imgSrc]);
+  }, [imgSrc, height, width, deviceWidth]);
 
   // Function to capture image from canvas with Face Mesh and hide video section
   const capturePhoto = () => {
@@ -255,12 +269,14 @@ const WebcamImg = () => {
     const data = canvas.toDataURL("image/png");
     setImgSrc(data);
     document.querySelector(".container-display").style.display = "none";
+    setPDResult(PDValue);
   };
 
   // Function to reset image source and showing back video section
   const resetPhoto = () => {
     setImgSrc(null);
     document.querySelector(".container-display").style.display = "flex";
+    setLastPDResult(PDResult);
   };
 
   // DOM elements which shows depending on what's happening in app
@@ -297,6 +313,19 @@ const WebcamImg = () => {
                 display: "none",
               }}
             />{" "}
+            <div className="values">
+              <p>{"PD: " + PDValue}</p>
+              <button
+                id="capture-btn"
+                onClick={(ev) => {
+                  capturePhoto();
+                  ev.preventDefault();
+                }}
+              >
+                Ta bilden
+              </button>
+              <p>{"Senaste: " + lastPDResult}</p>
+            </div>
             <canvas
               ref={canvasRef}
               id="output-canvas"
@@ -312,57 +341,44 @@ const WebcamImg = () => {
                 height: height,
               }}
             ></canvas>{" "}
-            <button
-              id="capture-btn"
-              onClick={(ev) => {
-                capturePhoto();
-                ev.preventDefault();
-              }}
-            >
-              Capture photo
-            </button>
           </div>
         </div>
         <div className="container-img">
+          <div className="values">
+            <p>{"PD: " + PDResult}</p>
+            <button
+              id="retake-btn"
+              onClick={(ev) => {
+                resetPhoto();
+                ev.preventDefault();
+              }}
+            >
+              Ta om bilden
+            </button>
+            <p>{"Senaste: " + lastPDResult}</p>
+          </div>
           <img src={imgSrc} className="result" id="photo" alt="screenshot" />
-          <button
-            id="retake-btn"
-            onClick={(ev) => {
-              resetPhoto();
-              ev.preventDefault();
-            }}
-          >
-            Retake
-          </button>
         </div>
         <div className="container-info" style={{ display: "none" }}>
+          <p>Bäst resultat kan uppnås när ansiktet är ca 40 cm från kameran.</p>
+          <p>Se till att det är bra belysning och att kameran är ren.</p>
+          <p>Sitt väldigt stilla och rör inte på huvudet.</p>
           <p>
-            Best result can be achieved, when the face is about 40 cm from the
-            camera.
+            Titta rakt in i kameran eller på den röda prickan överst och ta en
+            bild.
           </p>
           <p>
-            Make sure that there is a good lighting and the camera is clean.
+            Resultatet ovanför bilden är det ungefärliga avståndet mellan
+            pupiller.
           </p>
           <p>
-            Sit very still and don't move your head, look at the camera or above
-            and then take a picture.
+            Du kan ta om bilden så många gånger du vill (vänta tills videon
+            laddas igen).
           </p>
+          <p>Det är bra att ta bilden några gånger och räkna ut medelvärdet</p>
           <p>
-            The result number on snapshot is your approximate distance between
-            the pupils.
-          </p>
-          <p>You can retake the picture as many times as you want (wait until video loads again).</p>
-          <p>
-            It is good to take the picture a few times and calculate the
-            average
-          </p>
-          <p>
-            (add all numbers and then divide sum by the count of those numbers).
-          </p>
-          <p>You can save pictures locally on your computer if you want</p>
-          <p>
-            (right-click on the picture and choose "Save image as..." from
-            menu).
+            (addera alla siffror, dividera sedan summan med antalet av dessa
+            siffror).
           </p>
         </div>
       </div>
@@ -371,5 +387,3 @@ const WebcamImg = () => {
 };
 
 export default WebcamImg;
-
-// document.querySelector("#input-video").style.display = "none";

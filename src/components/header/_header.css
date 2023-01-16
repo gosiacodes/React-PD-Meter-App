@@ -1,16 +1,58 @@
 .header {
-    background-color: #2f5581;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.75rem 3rem;
-    color: #fff;
+  background-color: #2f5581;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem 3rem;
+  color: #fff;
+}
+
+.header-content {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-title {
+  font-size: 1.8rem;
+}
+
+#header-imvi-logo {
+  width: 5rem;
+  height: 5rem;
+}
+
+@media only screen and (max-width: 770px) {
+  .header {
+    padding: 1rem 2rem 0.5rem;
   }
-  
-  .header>a>img {
-    width: 5rem;
-    height: 5rem;
+  .header-title {
+    font-size: 1.65rem;
   }
-  
-  
+  #header-imvi-logo {
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  .header {
+    padding: 1rem 1.5rem 0.5rem;
+  }
+  .header-title {
+    font-size: 1.5rem;
+  }
+  #header-imvi-logo {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+@media only screen and (max-width: 380px) {
+  .header-title {
+    font-size: 1.35rem;
+  }
+}
