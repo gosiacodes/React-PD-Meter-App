@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/React-PD-Meter-App/static/css/main.9bdfdab8.css",
-    "main.js": "/React-PD-Meter-App/static/js/main.9c0e32d3.js",
+    "main.css": "/React-PD-Meter-App/static/css/main.867d211c.css",
+    "main.js": "/React-PD-Meter-App/static/js/main.6a42dcd0.js",
     "index.html": "/React-PD-Meter-App/index.html",
-    "main.9bdfdab8.css.map": "/React-PD-Meter-App/static/css/main.9bdfdab8.css.map",
-    "main.9c0e32d3.js.map": "/React-PD-Meter-App/static/js/main.9c0e32d3.js.map"
+    "main.867d211c.css.map": "/React-PD-Meter-App/static/css/main.867d211c.css.map",
+    "main.6a42dcd0.js.map": "/React-PD-Meter-App/static/js/main.6a42dcd0.js.map"
   },
   "entrypoints": [
-    "static/css/main.9bdfdab8.css",
-    "static/js/main.9c0e32d3.js"
+    "static/css/main.867d211c.css",
+    "static/js/main.6a42dcd0.js"
   ]
 }
