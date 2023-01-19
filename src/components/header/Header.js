@@ -14,7 +14,7 @@ const Header = () => {
               alt="imvi labs logo"
             />
           </a>
-          <h1 className="header-title">PD meter</h1>
+          <h1 className="header-title">Pupillavstånd</h1>
         </div>
       </header>
     </Fragment>

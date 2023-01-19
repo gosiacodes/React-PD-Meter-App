@@ -51,7 +51,7 @@
   }
 }
 
-@media only screen and (max-width: 380px) {
+@media only screen and (max-width: 390px) {
   .header-title {
     font-size: 1.35rem;
   }

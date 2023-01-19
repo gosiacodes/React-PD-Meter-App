@@ -18,7 +18,8 @@ const WebcamImg = () => {
   const [imgSrc, setImgSrc] = useState(null);
   const [PDValue, setPDValue] = useState("");
   const [PDResult, setPDResult] = useState("");
-  const [lastPDResult, setLastPDResult] = useState(0);
+  const [averageValue, setAverageValue] = useState(0);
+  const [numbersList, setNumbersList] = useState([]);
   const deviceWidth =
     window.innerWidth ||
     document.documentElement.clientWidth ||
@@ -262,6 +263,8 @@ const WebcamImg = () => {
     return () => {};
   }, [imgSrc, height, width, deviceWidth]);
 
+  useEffect(() => {}, [numbersList, PDResult]);
+
   // Function to capture image from canvas with Face Mesh and hide video section
   const capturePhoto = () => {
     document.querySelector(".container-img").style.display = "flex";
@@ -270,13 +273,21 @@ const WebcamImg = () => {
     setImgSrc(data);
     document.querySelector(".container-display").style.display = "none";
     setPDResult(PDValue);
+    const tempNumbers = [...numbersList];
+    tempNumbers.push(+PDValue);
+    console.log("All numbers: ");
+    console.log(tempNumbers);
+    setNumbersList(tempNumbers);
+    let average = tempNumbers.reduce((a, b) => a + b, 0) / tempNumbers.length;
+    console.log("Average: ");
+    console.log(average);
+    setAverageValue(tempNumbers.length > 0 ? average.toFixed(0) : 0);
   };
 
   // Function to reset image source and showing back video section
   const resetPhoto = () => {
     setImgSrc(null);
     document.querySelector(".container-display").style.display = "flex";
-    setLastPDResult(PDResult);
   };
 
   // DOM elements which shows depending on what's happening in app
@@ -313,19 +324,6 @@ const WebcamImg = () => {
                 display: "none",
               }}
             />{" "}
-            <div className="values">
-              <p>{"PD: " + PDValue}</p>
-              <button
-                id="capture-btn"
-                onClick={(ev) => {
-                  capturePhoto();
-                  ev.preventDefault();
-                }}
-              >
-                Ta bilden
-              </button>
-              <p>{"Senaste: " + lastPDResult}</p>
-            </div>
             <canvas
               ref={canvasRef}
               id="output-canvas"
@@ -340,10 +338,24 @@ const WebcamImg = () => {
                 width: width,
                 height: height,
               }}
-            ></canvas>{" "}
+            ></canvas>
+            <div className="values">
+              <p>{"PD: " + PDValue}</p>
+              <button
+                id="capture-btn"
+                onClick={(ev) => {
+                  capturePhoto();
+                  ev.preventDefault();
+                }}
+              >
+                Ta bilden
+              </button>
+              <p>{"Medel: " + averageValue}</p>
+            </div>{" "}
           </div>
         </div>
         <div className="container-img">
+          <img src={imgSrc} className="result" id="photo" alt="screenshot" />
           <div className="values">
             <p>{"PD: " + PDResult}</p>
             <button
@@ -355,11 +367,11 @@ const WebcamImg = () => {
             >
               Ta om bilden
             </button>
-            <p>{"Senaste: " + lastPDResult}</p>
+            <p>{"Medel: " + averageValue}</p>
           </div>
-          <img src={imgSrc} className="result" id="photo" alt="screenshot" />
         </div>
         <div className="container-info" style={{ display: "none" }}>
+          <h2>Instruktioner</h2>
           <p>Bäst resultat kan uppnås när ansiktet är ca 40 cm från kameran.</p>
           <p>Se till att det är bra belysning och att kameran är ren.</p>
           <p>Sitt väldigt stilla och rör inte på huvudet.</p>
@@ -374,11 +386,6 @@ const WebcamImg = () => {
           <p>
             Du kan ta om bilden så många gånger du vill (vänta tills videon
             laddas igen).
-          </p>
-          <p>Det är bra att ta bilden några gånger och räkna ut medelvärdet</p>
-          <p>
-            (addera alla siffror, dividera sedan summan med antalet av dessa
-            siffror).
           </p>
         </div>
       </div>

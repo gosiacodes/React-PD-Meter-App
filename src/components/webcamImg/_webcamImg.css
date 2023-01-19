@@ -11,6 +11,14 @@
   border-radius: 1rem;
 }
 
+.container-display {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .container-img,
 .container-video,
 .container-downloading {
@@ -46,7 +54,6 @@
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  color: #fff;
 }
 
 .values p {
@@ -119,9 +126,6 @@
   #imvi-logo {
     width: 10rem;
     height: 10rem;
-  }
-  .values {
-    justify-content: space-between;
   }
   .values p {
     font-size: 1.25rem;
