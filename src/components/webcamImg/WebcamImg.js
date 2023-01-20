@@ -60,10 +60,10 @@ const WebcamImg = () => {
   useEffect(() => {
     // Function to run canvas with video and Face Mesh when ready
     const onResults = (results) => {
-      // Hiding container with downloading info and showing results with video and explanation info
-      document.querySelector(".container-downloading").style.display = "none";
-      document.querySelector(".container-video").style.display = "flex";
-      document.querySelector(".container-info").style.display = "flex";
+      // // Hiding container with downloading info and showing results with video and explanation info
+      // document.querySelector(".container-downloading").style.display = "none";
+      // document.querySelector(".container-video").style.display = "flex";
+      // document.querySelector(".container-info").style.display = "flex";
 
       // Setting canvas - references and context
       const canvasElement = canvasRef.current;
@@ -290,6 +290,22 @@ const WebcamImg = () => {
     document.querySelector(".container-display").style.display = "flex";
   };
 
+  const openApp = () => {
+    // Hiding container with downloading info and showing results with video and explanation info
+    document.querySelector(".container-downloading").style.display = "none";
+    document.querySelector(".container-video").style.display = "flex";
+    document.querySelector("#info").style.display = "flex";
+  };
+
+  const toggleInfo = () => {
+    const coll = document.querySelector(".collapsible");
+    const arrow = document.querySelector(".arrow");
+    const content = document.querySelector(".content");
+    coll.classList.toggle("coll-active");
+    arrow.classList.toggle("arr-active");
+    content.classList.toggle("hidden");
+  };
+
   // DOM elements which shows depending on what's happening in app
   return (
     <Fragment>
@@ -301,6 +317,35 @@ const WebcamImg = () => {
             id="imvi-logo"
             alt="imvi labs logo"
           ></img>
+          <button
+            id="open-app-btn"
+            onClick={(ev) => {
+              openApp();
+              ev.preventDefault();
+            }}
+          >
+            Till appen
+          </button>
+          <div className="container-info">
+            <h2>Instruktion</h2>
+            <p>
+              Bäst resultat kan uppnås när ansiktet är ca 40 cm från kameran.
+            </p>
+            <p>Se till att det är bra belysning och att kameran är ren.</p>
+            <p>Sitt väldigt stilla och rör inte på huvudet.</p>
+            <p>
+              Titta rakt in i kameran eller på den röda prickan överst och ta en
+              bild.
+            </p>
+            <p>
+              Resultatet ovanför bilden är det ungefärliga avståndet mellan
+              pupiller.
+            </p>
+            <p>
+              Du kan ta om bilden så många gånger du vill (vänta tills videon
+              laddas igen).
+            </p>
+          </div>
         </div>
         <div className="container-display">
           <div className="container-video" style={{ display: "none" }}>
@@ -370,23 +415,35 @@ const WebcamImg = () => {
             <p>{"Medel: " + averageValue}</p>
           </div>
         </div>
-        <div className="container-info" style={{ display: "none" }}>
-          <h2>Instruktioner</h2>
-          <p>Bäst resultat kan uppnås när ansiktet är ca 40 cm från kameran.</p>
-          <p>Se till att det är bra belysning och att kameran är ren.</p>
-          <p>Sitt väldigt stilla och rör inte på huvudet.</p>
-          <p>
-            Titta rakt in i kameran eller på den röda prickan överst och ta en
-            bild.
-          </p>
-          <p>
-            Resultatet ovanför bilden är det ungefärliga avståndet mellan
-            pupiller.
-          </p>
-          <p>
-            Du kan ta om bilden så många gånger du vill (vänta tills videon
-            laddas igen).
-          </p>
+        <div className="container-info" id="info" style={{ display: "none" }}>
+          <h2
+            className="collapsible info-title"
+            onClick={(ev) => {
+              toggleInfo();
+              ev.preventDefault();
+            }}
+          >
+            Instruktion <i class="arrow"></i>
+          </h2>
+          <div className="content hidden">
+            <p>
+              Bäst resultat kan uppnås när ansiktet är ca 40 cm från kameran.
+            </p>
+            <p>Se till att det är bra belysning och att kameran är ren.</p>
+            <p>Sitt väldigt stilla och rör inte på huvudet.</p>
+            <p>
+              Titta rakt in i kameran eller på den röda prickan överst och ta en
+              bild.
+            </p>
+            <p>
+              Resultatet ovanför bilden är det ungefärliga avståndet mellan
+              pupiller.
+            </p>
+            <p>
+              Du kan ta om bilden så många gånger du vill (vänta tills videon
+              laddas igen).
+            </p>
+          </div>
         </div>
       </div>
     </Fragment>

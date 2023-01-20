@@ -30,7 +30,7 @@
   width: 100%;
 }
 
-.container-downloading {
+.container-downloading h1 {
   color: #fff;
 }
 
@@ -41,11 +41,59 @@
   align-items: flex-start;
   gap: 0.5rem;
   margin: 1rem;
+  width: 100%;
+}
+
+.info-title {
+  font-size: 1.3rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.hidden {
+  display: none;
+  overflow: hidden;
 }
 
 .container-info p {
   font-size: 1.1rem;
   font-weight: bold;
+}
+
+.collapsible {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0.2rem;
+  border-bottom: 3px solid transparent;
+}
+
+.coll-active,
+.collapsible:hover {
+  border-bottom: 3px solid #4379b8;
+}
+
+.arrow {
+  border: solid #000;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  margin-left: 0.5rem;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.arr-active {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
 }
 
 .values {
@@ -100,6 +148,9 @@
   .values p {
     font-size: 1.4rem;
   }
+  .info-title {
+    font-size: 1.2rem;
+  }
   .container-info p {
     font-size: 1rem;
   }
@@ -130,6 +181,9 @@
   .values p {
     font-size: 1.25rem;
   }
+  .info-title {
+    font-size: 1.1rem;
+  }
   .container-info p {
     font-size: 0.9rem;
   }
@@ -150,6 +204,9 @@
   }
   .values p {
     font-size: 1.1rem;
+  }
+  .info-title {
+    font-size: 1rem;
   }
   .container-info p {
     font-size: 0.8rem;
