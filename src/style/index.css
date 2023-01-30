@@ -1,4 +1,8 @@
 @import './App.css';
 @import '../components/header/_header.css';
 @import '../components/webcamImg/_webcamImg.css';
+@import '../components/webcamImg/_webcamImg.css';
+@import '../components/info/_info.css';
+@import '../components/infoIcon/_infoIcon.css';
+
 

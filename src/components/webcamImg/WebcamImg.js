@@ -10,6 +10,8 @@ import {
 } from "@mediapipe/face_mesh";
 import { Camera } from "@mediapipe/camera_utils";
 import { drawConnectors } from "@mediapipe/drawing_utils";
+import Info from "../../components/info/Info";
+// import InfoIcon from "../../components/infoIcon/InfoIcon";
 
 const WebcamImg = () => {
   // Global settings
@@ -60,11 +62,6 @@ const WebcamImg = () => {
   useEffect(() => {
     // Function to run canvas with video and Face Mesh when ready
     const onResults = (results) => {
-      // // Hiding container with downloading info and showing results with video and explanation info
-      // document.querySelector(".container-downloading").style.display = "none";
-      // document.querySelector(".container-video").style.display = "flex";
-      // document.querySelector(".container-info").style.display = "flex";
-
       // Setting canvas - references and context
       const canvasElement = canvasRef.current;
       canvasElement.width = width;
@@ -265,6 +262,20 @@ const WebcamImg = () => {
 
   useEffect(() => {}, [numbersList, PDResult]);
 
+  // Function for hiding container with introduction and showing container with info
+  const showInfo = () => {
+    document.querySelector("#card-1").style.display = "none";
+    document.querySelector("#card-2").style.display = "flex";
+    document.querySelector(".container-display").style.display = "none";
+    document.querySelector(".container-img").style.display = "none";
+  };
+
+  // Function for hiding container with info and showing results with video
+  const openApp = () => {
+    document.querySelector("#card-2").style.display = "none";
+    document.querySelector(".container-display").style.display = "flex";
+  };
+
   // Function to capture image from canvas with Face Mesh and hide video section
   const capturePhoto = () => {
     document.querySelector(".container-img").style.display = "flex";
@@ -290,33 +301,44 @@ const WebcamImg = () => {
     document.querySelector(".container-display").style.display = "flex";
   };
 
-  const openApp = () => {
-    // Hiding container with downloading info and showing results with video and explanation info
-    document.querySelector(".container-downloading").style.display = "none";
-    document.querySelector(".container-video").style.display = "flex";
-    document.querySelector("#info").style.display = "flex";
-  };
-
-  const toggleInfo = () => {
-    const coll = document.querySelector(".collapsible");
-    const arrow = document.querySelector(".arrow");
-    const content = document.querySelector(".content");
-    coll.classList.toggle("coll-active");
-    arrow.classList.toggle("arr-active");
-    content.classList.toggle("hidden");
-  };
-
   // DOM elements which shows depending on what's happening in app
   return (
     <Fragment>
       <div className="container-app">
-        <div className="container-downloading">
-          <h1>Downloading...</h1>
-          <img
-            src={process.env.PUBLIC_URL + "/images/imvi-logo.png"}
-            id="imvi-logo"
-            alt="imvi labs logo"
-          ></img>
+        <div className="container-card" id="card-1">
+          <picture>
+            <source
+              srcSet={process.env.PUBLIC_URL + "/images/eye-scanner-64.png"}
+              media="(max-width: 390px)"
+            />
+            <source
+              srcSet={process.env.PUBLIC_URL + "/images/eye-scanner-96.png"}
+              media="(max-width: 670px)"
+            />
+            <img
+              src={process.env.PUBLIC_URL + "/images/eye-scanner-128.png"}
+              alt="eye scanner"
+            />
+          </picture>
+          <p>
+            Du kan mäta ditt PD här med vårt digitala test, klicka på knappen
+            för att läsa instruktion.
+          </p>
+          <button
+            id="show-info-btn"
+            onClick={(ev) => {
+              showInfo();
+              ev.preventDefault();
+            }}
+          >
+            Instruktion
+          </button>
+        </div>
+        <div className="container-card" id="card-2" style={{ display: "none" }}>
+          <div className="container-info">
+            <h2 className="info-title">Instruktion</h2>
+            <Info />
+          </div>
           <button
             id="open-app-btn"
             onClick={(ev) => {
@@ -324,31 +346,11 @@ const WebcamImg = () => {
               ev.preventDefault();
             }}
           >
-            Till appen
+            Mät PD
           </button>
-          <div className="container-info">
-            <h2>Instruktion</h2>
-            <p>
-              Bäst resultat kan uppnås när ansiktet är ca 40 cm från kameran.
-            </p>
-            <p>Se till att det är bra belysning och att kameran är ren.</p>
-            <p>Sitt väldigt stilla och rör inte på huvudet.</p>
-            <p>
-              Titta rakt in i kameran eller på den röda prickan överst och ta en
-              bild.
-            </p>
-            <p>
-              Resultatet ovanför bilden är det ungefärliga avståndet mellan
-              pupiller.
-            </p>
-            <p>
-              Du kan ta om bilden så många gånger du vill (vänta tills videon
-              laddas igen).
-            </p>
-          </div>
         </div>
-        <div className="container-display">
-          <div className="container-video" style={{ display: "none" }}>
+        <div className="container-display" style={{ display: "none" }}>
+          <div className="container-video">
             <Webcam
               ref={webcamRef}
               videoConstraints={videoConstraints}
@@ -396,7 +398,7 @@ const WebcamImg = () => {
                 Ta bilden
               </button>
               <p>{"Medel: " + averageValue}</p>
-            </div>{" "}
+            </div>
           </div>
         </div>
         <div className="container-img">
@@ -413,36 +415,6 @@ const WebcamImg = () => {
               Ta om bilden
             </button>
             <p>{"Medel: " + averageValue}</p>
-          </div>
-        </div>
-        <div className="container-info" id="info" style={{ display: "none" }}>
-          <h2
-            className="collapsible info-title"
-            onClick={(ev) => {
-              toggleInfo();
-              ev.preventDefault();
-            }}
-          >
-            Instruktion <i class="arrow"></i>
-          </h2>
-          <div className="content hidden">
-            <p>
-              Bäst resultat kan uppnås när ansiktet är ca 40 cm från kameran.
-            </p>
-            <p>Se till att det är bra belysning och att kameran är ren.</p>
-            <p>Sitt väldigt stilla och rör inte på huvudet.</p>
-            <p>
-              Titta rakt in i kameran eller på den röda prickan överst och ta en
-              bild.
-            </p>
-            <p>
-              Resultatet ovanför bilden är det ungefärliga avståndet mellan
-              pupiller.
-            </p>
-            <p>
-              Du kan ta om bilden så många gånger du vill (vänta tills videon
-              laddas igen).
-            </p>
           </div>
         </div>
       </div>
