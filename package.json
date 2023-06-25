@@ -1,7 +1,7 @@
 {
   "name": "react-intro-1",
   "version": "0.1.0",
-  "homepage": "https://margareta75.github.io/React-PD-Meter-App",
+  "homepage": "https://gosiacodes.github.io/React-PD-Meter-App",
   "private": true,
   "dependencies": {
     "@mediapipe/camera_utils": "^0.3.1640029074",
