@@ -1,4 +1,40 @@
-# Getting Started with Create React App
+# :sparkles: React PD Meter App :sparkles:
+
+React PD-Meter App (measures distance between pupils) with MediaPipe Face Mesh - internship project (2023)
+
+https://gosiacodes.github.io/React-PD-Meter-App/
+
+## :pushpin: _How does the application work?_
+
+Application uses your device camera.
+
+In this project I used Googles AI solution MediaPipe Face Mesh that estimates 468 3D face landmarks in real-time. 
+
+It uses machine learning (ML) to infer the 3D surface geometry, requiring only a single camera input.
+
+AI finds your pupils and measures distance between them. 
+
+It is not that correct when you take multiple shots, but it is fun anyway. 
+
+### _Instruction:_
+
+Best results can be achieved when the face is about 40 cm from the camera.
+
+Make sure there is good light and the camera is clean.
+
+Sit still and do not move your head.
+
+Look straight into the camera or at the red dot at the top and take a picture.
+
+The result on the left is the approximate distance between pupils.
+
+The result on the right is the PD average if you take multiple shots.
+
+You can retake the picture as many times as you like (wait for the video to reload).
+
+************************************************************************************
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
