@@ -1,4 +1,4 @@
-// Copyright 2023 MediaPipe & imvi labs & Malgorzata Pick
+// Copyright 2023 MediaPipe & Malgorzata Pick
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import {
@@ -321,8 +321,8 @@ const WebcamImg = () => {
             />
           </picture>
           <p>
-            Du kan mäta ditt PD här med vårt digitala test, klicka på knappen
-            för att läsa instruktion.
+            You can measure your PD here with this digital test, click the
+            button to read instruction.
           </p>
           <button
             id="show-info-btn"
@@ -331,12 +331,12 @@ const WebcamImg = () => {
               ev.preventDefault();
             }}
           >
-            Instruktion
+            Instruction
           </button>
         </div>
         <div className="container-card" id="card-2" style={{ display: "none" }}>
           <div className="container-info">
-            <h2 className="info-title">Instruktion</h2>
+            <h2 className="info-title">Instruction</h2>
             <Info />
           </div>
           <button
@@ -346,7 +346,7 @@ const WebcamImg = () => {
               ev.preventDefault();
             }}
           >
-            Mät PD
+            Measure PD
           </button>
         </div>
         <div className="container-display" style={{ display: "none" }}>
@@ -395,9 +395,9 @@ const WebcamImg = () => {
                   ev.preventDefault();
                 }}
               >
-                Ta bilden
+                Take picture
               </button>
-              <p>{"Medel: " + averageValue}</p>
+              <p>{"Average: " + averageValue}</p>
             </div>
           </div>
         </div>
@@ -412,9 +412,9 @@ const WebcamImg = () => {
                 ev.preventDefault();
               }}
             >
-              Ta om bilden
+              Retake
             </button>
-            <p>{"Medel: " + averageValue}</p>
+            <p>{"Average: " + averageValue}</p>
           </div>
         </div>
       </div>

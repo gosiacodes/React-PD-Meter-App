@@ -5,20 +5,23 @@ const Info = () => {
   return (
     <Fragment>
       <div className="content">
-        <p>Bäst resultat kan uppnås när ansiktet är ca 40 cm från kameran.</p>
-        <p>Se till att det är bra ljus och att kameran är ren.</p>
-        <p>Sitt stilla och rör inte på huvudet.</p>
+        <p>Best results can be achieved when the face is about 40 cm from the
+        camera.</p>
+        <p>Make sure there is good lighting and the camera is clean.</p>
+        <p>Sit still and do not move your head.</p>
         <p>
-          Titta rakt in i kameran eller på den röda prickan överst och ta en
-          bild.
+          Look straight into the camera or at the red dot at the top and take a
+          picture.
         </p>
         <p>
-          Resultatet till vänster är det ungefärliga avståndet mellan pupiller.
+          The result on the left is the approximate distance between the pupils.
         </p>
-        <p>Resultatet till höger är PD-medelvärdet om du tar flera bilder.</p>
         <p>
-          Du kan ta om bilden så många gånger du vill (vänta tills videon laddas
-          igen).
+          The result on the right is the PD average if you take multiple shots.
+        </p>
+        <p>
+          You can retake the picture as many times as you like (wait for the
+          video to reload).
         </p>
       </div>
     </Fragment>
