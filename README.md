@@ -32,6 +32,10 @@ The result on the right is the PD average if you take multiple shots.
 
 You can retake the picture as many times as you like (wait for the video to reload).
 
+## :pushpin: _GUI example_
+
+![PD Meter App](public/images/PD_Meter.png)
+
 ************************************************************************************
 
 ## Getting Started with Create React App
